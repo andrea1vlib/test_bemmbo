@@ -49,7 +49,7 @@ export default function InvoicesPage() {
                     onInject={handleInject}
                 />
 
-                <TableInvoices InvoicesData={invoices} loading={loading}/>
+                <TableInvoices InvoicesData={invoices} loading={loading} setInvoicesData={setInvoices}/>
             </div>
         </div>
     );

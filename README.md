@@ -15,6 +15,14 @@ Levanta el entorno de desarrollo
 ```bash
 npm run dev
 ```
+Incluir en .env las sisguientes variables:
+
+```
+VITE_AUTH_TOKEN= rellenar con token
+VITE_API_URL="https://..."
+````
+
+
 
 Esto abrirá la aplicación en http://localhost:5173
 

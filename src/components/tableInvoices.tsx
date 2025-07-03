@@ -9,9 +9,10 @@ import getPaginationRange from "../utils/getPaginationRange";
 type TableInvoicesProps = {
   InvoicesData: Invoices[];
   loading: boolean;
+  setInvoicesData: (data: Invoices[]) => void;
 };
 
-export default function TableInvoices({ InvoicesData, loading }: TableInvoicesProps) {
+export default function TableInvoices({ InvoicesData, loading, setInvoicesData }: TableInvoicesProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const lastIndex = currentPage * itemsPerPage;
@@ -19,6 +20,16 @@ export default function TableInvoices({ InvoicesData, loading }: TableInvoicesPr
     const currentInvoices = InvoicesData.slice(firstIndex, lastIndex);
     const totalPages = Math.ceil(InvoicesData.length / itemsPerPage);
     const pagination = getPaginationRange(totalPages, currentPage);
+
+    const handleChangeCheckbox = (invoice: Invoices) => {
+        console.log("Checkbox clicked for invoice:", invoice.id);
+        console.log("Current selection state:", invoice.selected);
+        const updated = InvoicesData.map((inv) =>
+          inv.id === invoice.id ? { ...inv, selected: !inv.selected } : inv
+        );
+        setInvoicesData(updated);
+        console.log("New selection state:", invoice.selected);
+    }
 
     if (loading) {
         return (
@@ -45,21 +56,17 @@ export default function TableInvoices({ InvoicesData, loading }: TableInvoicesPr
                 <td className="py-4 pr-0 pl-2 border-b bg-transparent border-b-[#f3f5f7]">
                     <input
                       type="checkbox"
-                      className="
+                      className={`
                         appearance-none
                         h-5 w-5
                         border-2 border-gray-400
                         rounded
-                        bg-transparent
-                        checked:bg-blue-600
-                        checked:border-blue-600
-                        focus:ring-2 focus:ring-[#464955]
+                        bg-white
+                        checked:bg-[#464955]
                         cursor-pointer
-                      "
+                      `}
                       checked={invoice.selected || false}
-                      onChange={() => {
-                        invoice.selected = !invoice.selected;
-                      }}
+                      onChange={() => handleChangeCheckbox(invoice)}
                     />
                 </td>
                 <td className="py-4 pl-4 pr-8 border-b text-black border-b-[#f3f5f7]">{invoice.receiverName}</td>
