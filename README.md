@@ -18,3 +18,4 @@ npm run dev
 
 Esto abrirá la aplicación en http://localhost:5173
 
+El proyecto se encuentra en el url: https://test-bemmbo.vercel.app/ 
