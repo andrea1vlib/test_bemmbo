@@ -29,12 +29,16 @@ export default function InvoicesPage() {
             return;
         }
         // Here you would typically send the selected invoices to the server
-        console.log("Injecting invoices:", selectedInvoices);
+
         // For now, just mark them as injected in the local state
         // const updatedInvoices = invoices.map(invoice => 
         //     selectedInvoices.includes(invoice) ? { ...invoice, injected: true } : invoice
         // );
         // setInvoices(updatedInvoices);
+    }
+
+    if (error) {
+        return <div className="text-red-500">Ocurrió un error, por favor recarga la página</div>;
     }
 
     return (
