@@ -10,9 +10,10 @@ type TableInvoicesProps = {
   InvoicesData: Invoices[];
   loading: boolean;
   setInvoicesData: (data: Invoices[]) => void;
+  setSelectedInvoices: (data: Invoices[]) => void;
 };
 
-export default function TableInvoices({ InvoicesData, loading, setInvoicesData }: TableInvoicesProps) {
+export default function TableInvoices({ InvoicesData, loading, setInvoicesData, setSelectedInvoices }: TableInvoicesProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const lastIndex = currentPage * itemsPerPage;
@@ -22,7 +23,6 @@ export default function TableInvoices({ InvoicesData, loading, setInvoicesData }
     const pagination = getPaginationRange(totalPages, currentPage);
 
     const handleChangeCheckbox = (invoice: Invoices) => {
-      console.log("Checkbox clicked for invoice:", invoice);
         if (invoice.injected) {
             alert("No puedes seleccionar una factura ya inyectada");
             return;
@@ -30,6 +30,7 @@ export default function TableInvoices({ InvoicesData, loading, setInvoicesData }
         const updated = InvoicesData.map((inv) =>
           inv.id === invoice.id ? { ...inv, selected: !inv.selected } : inv
         );
+        setSelectedInvoices(updated.filter(inv => inv.selected));
         setInvoicesData(updated);
     }
 

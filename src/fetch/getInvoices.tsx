@@ -24,7 +24,6 @@ export async function getInvoices(): Promise<Invoices[]> {
   response_json.forEach((invoice:Invoices) => {
     invoice.selected = false; // Ensure selected is always false
   });
-  console.log("Successfully fetched invoices");
   return response_json;
 
 
