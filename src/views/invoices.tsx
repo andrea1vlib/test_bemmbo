@@ -12,7 +12,7 @@ export default function InvoicesPage() {
     const [error, setError] = useState<string | null>(null);
     const [selectedInvoices, setSelectedInvoices] = useState<Invoices[]>([]);
     const [ idsInject, setIdsInject ] = useState<string[]>([]);
-    const limit_inject = 4;
+    const limit_inject = 25;
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
