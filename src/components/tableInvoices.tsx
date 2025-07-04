@@ -22,6 +22,11 @@ export default function TableInvoices({ InvoicesData, loading, setInvoicesData }
     const pagination = getPaginationRange(totalPages, currentPage);
 
     const handleChangeCheckbox = (invoice: Invoices) => {
+      console.log("Checkbox clicked for invoice:", invoice);
+        if (invoice.injected) {
+            alert("No puedes seleccionar una factura ya inyectada");
+            return;
+        }
         const updated = InvoicesData.map((inv) =>
           inv.id === invoice.id ? { ...inv, selected: !inv.selected } : inv
         );
@@ -61,6 +66,7 @@ export default function TableInvoices({ InvoicesData, loading, setInvoicesData }
                         bg-white
                         checked:bg-[#464955]
                         cursor-pointer
+                        ${invoice.injected ? "bg-white cursor-not-allowed" : ""}
                       `}
                       checked={invoice.selected || false}
                       onChange={() => handleChangeCheckbox(invoice)}
