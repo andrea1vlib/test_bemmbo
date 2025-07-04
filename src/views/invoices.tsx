@@ -12,6 +12,7 @@ export default function InvoicesPage() {
     const [error, setError] = useState<string | null>(null);
     const [selectedInvoices, setSelectedInvoices] = useState<Invoices[]>([]);
     const [ idsInject, setIdsInject ] = useState<string[]>([]);
+    const [loadingInject, setLoadingInject] = useState(false);
     const limit_inject = 25;
     useEffect(() => {
         const fetchInvoices = async () => {
@@ -35,6 +36,7 @@ export default function InvoicesPage() {
             alert("Please select at least one invoice to inject.");
             return;
         }
+        setLoadingInject(true);
         const totalInjections = selectedInvoices.length;
         const counterInjections = Math.ceil(selectedInvoices.length / limit_inject);
         for (let i = 0; i < counterInjections; i++) {
@@ -63,6 +65,7 @@ export default function InvoicesPage() {
                 }
             }
             usePostInject();
+            setLoadingInject(false);
             
         }
 
@@ -78,6 +81,7 @@ export default function InvoicesPage() {
                 <ButtonInject
                     selectedInvoices={selectedInvoices}
                     onInject={handleInject}
+                    loading={loadingInject}
 
                 />
 
