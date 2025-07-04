@@ -22,13 +22,10 @@ export default function TableInvoices({ InvoicesData, loading, setInvoicesData }
     const pagination = getPaginationRange(totalPages, currentPage);
 
     const handleChangeCheckbox = (invoice: Invoices) => {
-        console.log("Checkbox clicked for invoice:", invoice.id);
-        console.log("Current selection state:", invoice.selected);
         const updated = InvoicesData.map((inv) =>
           inv.id === invoice.id ? { ...inv, selected: !inv.selected } : inv
         );
         setInvoicesData(updated);
-        console.log("New selection state:", invoice.selected);
     }
 
     if (loading) {
